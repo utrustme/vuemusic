@@ -14,7 +14,17 @@ module.exports = {
     // allow async-await
     'generator-star-spacing': 'off',
     "space-before-function-paren": 0,
-    "eol-last": 0
+    "eol-last": 0,
+    "prettier/prettier": [
+      "error",
+      {
+        "semi": false,
+       "singleQuote": true,
+       "trailingComma": "none",
+       "bracketSpacing": true,
+       "jsxBracketSameLine": true
+      }
+    ]
   },
   parserOptions: {
     parser: "babel-eslint"

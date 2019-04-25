@@ -1,7 +1,7 @@
 // vue.config.js
-// const path = require('path')
+const path = require('path')
 
-// const resolve = dir => path.join(__dirname, dir)
+const resolve = dir => path.join(__dirname, dir)
 // let pages = null
 // const buildModes = ['deploy', 'test', 'prod']
 // // 读取 pages 配置文件.
@@ -46,7 +46,7 @@ module.exports = {
     // 添加路径别名
     config.resolve.alias
     // 公共组件路径
-      .set('@', resolve('src/'))
+      .set('@', resolve('src'))
   },
   // 打包时不生成.map文件
   productionSourceMap: false,
