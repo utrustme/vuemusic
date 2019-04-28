@@ -47,6 +47,9 @@ module.exports = {
     config.resolve.alias
     // 公共组件路径
       .set('@', resolve('src'))
+      .set('components', resolve('src/components'))
+      .set('common', resolve('src/common'))
+      .set('api', resolve('src/api'))
   },
   // 打包时不生成.map文件
   productionSourceMap: false,
@@ -76,12 +79,31 @@ module.exports = {
     // openPage: `${Object.keys(pages)[0]}/`
     // openPage: 'portal/'
     // proxy: 'http://localhost:4000' // 配置跨域处理
-    /* proxy: {
-      '/api': {
-        target: '<url>',
-        ws: true,
-        changeOrigin: true
+    proxy: {
+      '/getDiscList': {
+        target: 'https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg',
+        // ws: true,
+        // changeOrigin: true,
+        pathRewrite: {
+          '^/getDiscList': ''
+        },
+        // changeOrigin: true,
+        headers: {
+          referer: 'https://c.y.qq.com/',
+          host: 'c.y.qq.com'
+        }
       },
-    },  // 配置多个代理 */
+      '/getDiscInfo': {
+        target: 'https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg',
+        pathRewrite: {
+          '^/getDiscInfo': ''
+        },
+        changeOrigin: true,
+        headers: {
+          referer: 'https://y.qq.com',
+          host: 'y.qq.com'
+        }
+      },
+    },  // 配置多个代理 
   }
 }
