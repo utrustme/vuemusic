@@ -1,33 +1,38 @@
 import jsonp from 'common/js/jsonp'
 import { commonParams, options } from './config'
 import axios from 'axios'
-
+// axios推荐接口
+// 利用jsonp获取数据
+// 获取轮播图数据
 export function getRecommend() {
+  // 此函数方法的实现是jsonp
   const url =
     'https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg'
 
+  // Object.assign（），ES6语法
   const data = Object.assign({}, commonParams, {
     platform: 'h5',
-    uni: 0,
+    uin: 0,
     needNewCode: 1
   })
 
-  return jsonp(url, data, options)
+  return jsonp(url, data, options) // jsonp请求
 }
 
 export function getDiscList() {
-  const url = '/getDiscList'
+  // 会出现500错误  -- const url = 'https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg'
+  const url = 'getDiscList'
 
   const data = Object.assign({}, commonParams, {
-    platform: 'yqq.json',
-    hostUni: 0,
+    platform: 'yqq',
+    hostUin: 0,
     sin: 0,
+    ein: 29,
     sortId: 5,
     needNewCode: 0,
     categoryId: 10000000,
-    rnd: Math.random(),
-    format: 'json',
-    ein: 19
+    rnd: Math.random(), // 随机数字
+    format: 'json' // 返回json格式
   })
 
   return axios
@@ -39,29 +44,23 @@ export function getDiscList() {
     })
 }
 
-export function getDiscInfo(disstid, pageNumber, pageSize) {
-  const url = '/getDiscInfo'
+export function getSongList(disstid) {
+  const url = 'getSongList'
+  // const url = 'https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg'
 
   const data = Object.assign({}, commonParams, {
-    platform: 'h5',
-    new_format: 1,
-    pic: 500,
-    sin: 0,
-    sortId: 5,
-    needNewCode: 1,
-    notice: 0,
+    disstid,
     type: 1,
     json: 1,
     utf8: 1,
     onlysong: 0,
-    g_tk: 45727115,
-    nosign: 1,
-    disstid: disstid,
+    platform: 'yqq.json',
     format: 'json',
-    song_begin: pageNumber,
-    song_num: pageSize
+    hostUin: 0,
+    needNewCode: 0
   })
 
+  // return jsonp(url, data, options) // jsonp请求
   return axios
     .get(url, {
       params: data

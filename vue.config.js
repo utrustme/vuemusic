@@ -50,6 +50,7 @@ module.exports = {
       .set('components', resolve('src/components'))
       .set('common', resolve('src/common'))
       .set('api', resolve('src/api'))
+      .set('base', resolve('src/base'))
   },
   // 打包时不生成.map文件
   productionSourceMap: false,
@@ -93,17 +94,61 @@ module.exports = {
           host: 'c.y.qq.com'
         }
       },
-      '/getDiscInfo': {
+      '/getSongList': {
         target: 'https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg',
         pathRewrite: {
-          '^/getDiscInfo': ''
+          '^/getSongList': ''
         },
         changeOrigin: true,
         headers: {
-          referer: 'https://y.qq.com',
-          host: 'y.qq.com'
+          referer: 'https://y.qq.com/',
+          host: 'https://y.qq.com'
         }
       },
+      '/getLyric': {
+        target: 'https://c.y.qq.com/lyric/fcgi-bin/fcg_query_lyric_new.fcg',
+        pathRewrite: {
+          '^/getLyric': ''
+        },
+        changeOrigin: true,
+        headers: {
+          referer: 'https://y.qq.com/portal/player.html',
+          host: 'https://y.qq.com'
+        }
+      },
+      '/getHotKey': {
+        target: 'https://c.y.qq.com/splcloud/fcgi-bin/gethotkey.fcg',
+        pathRewrite: {
+          '^/getHotKey': ''
+        },
+        changeOrigin: true,
+        headers: {
+          referer: 'https://y.qq.com/portal/search.html',
+          host: 'https://y.qq.com'
+        }
+      },
+      '/search': {
+        target: 'https://c.y.qq.com/soso/fcgi-bin/search_for_qq_cp',
+        pathRewrite: {
+          '^/search': ''
+        },
+        changeOrigin: true,
+        headers: {
+          referer: 'https://y.qq.com/portal/search.html',
+          host: 'https://y.qq.com'
+        }
+      },
+      '/getVkey': {
+        target: 'https://u.y.qq.com/cgi-bin/musicu.fcg',
+        pathRewrite: {
+          '^/getVkey': ''
+        },
+        changeOrigin: true,
+        headers: {
+          referer: 'https://y.qq.com/portal/player.html',
+          origin: 'https://y.qq.com'
+        }
+      }
     },  // 配置多个代理 
   }
 }

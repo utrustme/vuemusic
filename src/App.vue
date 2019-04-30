@@ -1,28 +1,27 @@
 <template>
-  <div id="app">
+  <div id="app" @touchmove.prevent>
     <m-header></m-header>
-    <tab-bar></tab-bar>
+    <tab></tab>
+    <!-- 使用keep-AliveDOM缓存到内存中，不会重新请求 -->
     <keep-alive>
-      <router-view />
+      <router-view></router-view>
     </keep-alive>
+    <player></player>
   </div>
 </template>
 
 <script>
 import MHeader from 'components/m-header/m-header'
-import TabBar from 'components/tab/tab'
+import Player from 'components/player/player'
+import Tab from 'components/tab/tab'
+// 注意标签和引入驼峰，可以有区别
 export default {
-  name: 'app',
   components: {
     MHeader,
-    TabBar
+    Tab,
+    Player
   }
 }
 </script>
 
-<style lang="less" scoped>
-@import '~common/style/variable.less';
-#app {
-  color: @color-theme;
-}
-</style>
+<style scoped lang="stylus"></style>

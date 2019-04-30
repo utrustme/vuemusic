@@ -1,23 +1,27 @@
-import fastclick from 'fastclick'
-import VueLazyLoad from 'vue-lazyload'
 import Vue from 'vue'
-import App from './App.vue'
-import router from './router/router'
-import store from './store/store'
-// 全局CSS样式
-import 'common/style/index.less'
+import App from './App'
+import router from './router'
+// 解决移动端300延迟
+import fastclick from 'fastclick'
+import VueLazyload from 'vue-lazyload'
+import store from './store'
 
-// 处理浏览器300ms延时
+import 'common/stylus/index.styl'
+
+/* eslint-disable no-unused-vars */
+// import vConsole from 'vconsole'
+// 注入事件，绑定到DOM上
 fastclick.attach(document.body)
 
-Vue.config.productionTip = false
-
-Vue.use(VueLazyLoad, {
+// 懒加载，插件，，require是webpack支持的
+Vue.use(VueLazyload, {
   loading: require('common/image/default.png')
 })
 
+/* eslint-disable no-new */
 new Vue({
+  el: '#app',
   router,
   store,
   render: h => h(App)
-}).$mount('#app')
+})
